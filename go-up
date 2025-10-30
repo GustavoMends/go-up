@@ -25,9 +25,9 @@ for FILE in "$@"; do
 
   if [ "$UPLOAD_STATUS" = 'ok' ]; then
     GOLINK=$(echo $RESPONSE | grep -Po '(?<="downloadPage":")[^"]*')
-    GOMD5=$(echo $RESPONSE | grep -Po '(?<="md5":")[^"]*')
+    FILE_SHA256=$(sha256sum "$FILE" | awk '{print $1}')
     echo "${BLD_GRN}Download: ${GRN}$GOLINK"
-    echo "${BLD_GRN}MD5: ${GRN}$GOMD5"
+    echo "${BLD_GRN}SHA256 CHECKSUM: ${GRN}$FILE_SHA256"
   else
     echo "${RED}Upload failed!"
   fi
